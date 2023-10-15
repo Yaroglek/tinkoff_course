@@ -14,7 +14,9 @@ public class Task6 {
         var descNum = Integer.parseInt(String.join("", list));
         var diff = descNum - reverseNumber(descNum);
 
-        if (diff == KAPREKAR) return 1;
+        if (diff == KAPREKAR) {
+            return 1;
+        }
         return 1 + countK(diff);
     }
 

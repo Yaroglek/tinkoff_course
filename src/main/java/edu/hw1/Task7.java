@@ -8,8 +8,10 @@ public class Task7 {
         var byteNumber = Integer.toBinaryString(number);
         shift = shift % byteNumber.length();
         var byteArray = byteNumber.split("");
-        var n = Stream.concat(Arrays.stream(byteArray).skip(byteNumber.length() - shift),
-                Arrays.stream(byteArray).limit(byteNumber.length() - shift)).toList();
+        var n = Stream.concat(
+            Arrays.stream(byteArray).skip(byteNumber.length() - shift),
+            Arrays.stream(byteArray).limit(byteNumber.length() - shift)
+        ).toList();
         return Integer.parseInt(String.join("", n), 2);
     }
 

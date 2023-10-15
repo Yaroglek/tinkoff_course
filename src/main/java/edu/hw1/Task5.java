@@ -2,8 +2,12 @@ package edu.hw1;
 
 public class Task5 {
     public static boolean isPalindromeDescendant(int number) {
-        if (number < 10) return false;
-        if (isPalindrome(number)) return true;
+        if (number < 10) {
+            return false;
+        }
+        if (isPalindrome(number)) {
+            return true;
+        }
 
         String numStr = String.valueOf(number);
         StringBuilder result = new StringBuilder();
@@ -13,9 +17,9 @@ public class Task5 {
             if (i + 1 < numStr.length()) {
                 int digit2 = Character.getNumericValue(numStr.charAt(i + 1));
                 result.append(digit1 + digit2);
+            } else {
+                result.append(digit1);
             }
-
-            else result.append(digit1);
         }
 
         return isPalindromeDescendant(Integer.parseInt(result.toString()));
