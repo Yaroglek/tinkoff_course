@@ -12,7 +12,7 @@ public class Task6 {
         var list = new ArrayList<>(Arrays.asList(String.valueOf(number).split("")));
         Collections.sort(list);
         Collections.reverse(list);
-        var descNum = Integer.parseInt(String.join("", list));;
+        var descNum = Integer.parseInt(String.join("", list));
         var diff = descNum - reverseNumber(descNum);
 
         if (diff == 6174)
