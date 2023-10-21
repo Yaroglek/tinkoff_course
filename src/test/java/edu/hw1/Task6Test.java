@@ -7,16 +7,16 @@ class Task6Test {
 
     @Test
     void countK1() {
-        Assertions.assertEquals(Task6.countK(6621), 5);
+        Assertions.assertEquals(5, Task6.countK(6621));
     }
 
     @Test
     void countK2() {
-        Assertions.assertEquals(Task6.countK(6554), 4);
+        Assertions.assertEquals(4, Task6.countK(6554));
     }
 
     @Test
     void countK3() {
-        Assertions.assertEquals(Task6.countK(1234), 3);
+        Assertions.assertEquals(3, Task6.countK(1234));
     }
 }

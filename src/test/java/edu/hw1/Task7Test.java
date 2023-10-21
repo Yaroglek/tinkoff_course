@@ -7,12 +7,12 @@ class Task7Test {
 
     @Test
     void rotateRight1() {
-        Assertions.assertEquals(Task7.rotateRight(8, 1), 4);
+        Assertions.assertEquals(4, Task7.rotateRight(8, 1));
     }
 
     @Test
     void rotateRight2() {
-        Assertions.assertEquals(Task7.rotateRight(8, 32), 8);
+        Assertions.assertEquals(8, Task7.rotateRight(8, 32));
     }
 
     @Test
@@ -22,6 +22,6 @@ class Task7Test {
 
     @Test
     void rotateLeft2() {
-        Assertions.assertEquals(Task7.rotateLeft(17, 2), 6);
+        Assertions.assertEquals(6, Task7.rotateLeft(17, 2));
     }
 }

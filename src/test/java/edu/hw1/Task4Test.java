@@ -7,17 +7,17 @@ class Task4Test {
 
     @Test
     void fixString1() {
-        Assertions.assertEquals(Task4.fixString("123456"), "214365");
+        Assertions.assertEquals("214365", Task4.fixString("123456"));
     }
 
     @Test
     void fixString2() {
-        Assertions.assertEquals(Task4.fixString("badce"), "abcde");
+        Assertions.assertEquals("abcde", Task4.fixString("badce"));
     }
 
     @Test
     void fixString3() {
 
-        Assertions.assertEquals(Task4.fixString("hTsii  s aimex dpus rtni.g"), "This is a mixed up string.");
+        Assertions.assertEquals("This is a mixed up string.", Task4.fixString("hTsii  s aimex dpus rtni.g"));
     }
 }

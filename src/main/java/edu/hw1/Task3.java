@@ -7,6 +7,9 @@ public final class Task3 {
     }
 
     public static boolean isNestable(int[] array1, int[] array2) {
+        if (array1.length == 0 | array2.length == 0) {
+            return false;
+        }
         return getMin(array1) > getMin(array2)
             & getMax(array1) < getMax(array2);
     }
