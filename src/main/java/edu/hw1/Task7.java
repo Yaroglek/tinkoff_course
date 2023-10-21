@@ -3,17 +3,17 @@ package edu.hw1;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-public class Task7 {
+public final class Task7 {
     private Task7() {
     }
 
     public static int rotateRight(int number, int shift) {
         var byteNumber = Integer.toBinaryString(number);
-        shift = shift % byteNumber.length();
+        var trueShift = shift % byteNumber.length();
         var byteArray = byteNumber.split("");
         var n = Stream.concat(
-            Arrays.stream(byteArray).skip(byteNumber.length() - shift),
-            Arrays.stream(byteArray).limit(byteNumber.length() - shift)
+            Arrays.stream(byteArray).skip(byteNumber.length() - trueShift),
+            Arrays.stream(byteArray).limit(byteNumber.length() - trueShift)
         ).toList();
         return Integer.parseInt(String.join("", n), 2);
     }

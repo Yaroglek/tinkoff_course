@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class Task6 {
+public final class Task6 {
     private Task6() {
     }
 
     private static final int KAPREKAR = 6174;
+    private static final int LOWER_BOUND = 1000;
+    private static final int UPPER_BOUND = 9999;
+    private static final int SAME_DIGITS = 1111;
 
     public static int countK(int number) {
-        if (number < 1000 || number > 9999 || checkSameDigits(number)) {
+        if (number < LOWER_BOUND || number > UPPER_BOUND || number % SAME_DIGITS == 0) {
             return -1;
         }
         var list = new ArrayList<>(Arrays.asList(String.valueOf(number).split("")));
@@ -26,6 +29,7 @@ public class Task6 {
         return 1 + countK(diff);
     }
 
+    @SuppressWarnings({"MagicNumber", "ParameterAssignment"})
     private static int reverseNumber(int number) {
         int result = 0;
 
@@ -36,18 +40,5 @@ public class Task6 {
         }
 
         return result;
-    }
-
-    private static boolean checkSameDigits(int number) {
-        String str = Integer.toString(number);
-        char firstDigit = str.charAt(0);
-
-        for (int i = 1; i < str.length(); i++) {
-            if (str.charAt(i) != firstDigit) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

@@ -2,7 +2,7 @@ package edu.hw1;
 
 import java.util.Arrays;
 
-public class Task3 {
+public final class Task3 {
     private Task3() {
     }
 
