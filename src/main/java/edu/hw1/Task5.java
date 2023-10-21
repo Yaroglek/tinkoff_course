@@ -1,6 +1,9 @@
 package edu.hw1;
 
 public class Task5 {
+    private Task5() {
+    }
+
     public static boolean isPalindromeDescendant(int number) {
         if (number < 10) {
             return false;
@@ -25,7 +28,7 @@ public class Task5 {
         return isPalindromeDescendant(Integer.parseInt(result.toString()));
     }
 
-    public static boolean isPalindrome(int number) {
+    private static boolean isPalindrome(int number) {
         int result = 0, temp = number;
         while (temp > 0) {
             result = result * 10 + temp % 10;

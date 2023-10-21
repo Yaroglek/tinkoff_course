@@ -3,8 +3,19 @@ package edu.hw1;
 import java.util.Arrays;
 
 public class Task3 {
+    private Task3() {
+    }
+
     public static boolean isNestable(int[] array1, int[] array2) {
-        return Arrays.stream(array1).min().getAsInt() > Arrays.stream(array2).min().getAsInt()
-            & Arrays.stream(array1).max().getAsInt() < Arrays.stream(array2).max().getAsInt();
+        return getMin(array1) > getMin(array2)
+            & getMax(array1) < getMax(array2);
+    }
+
+    private static int getMin(int[] array) {
+        return Arrays.stream(array).min().getAsInt();
+    }
+
+    private static int getMax(int[] array) {
+        return Arrays.stream(array).max().getAsInt();
     }
 }

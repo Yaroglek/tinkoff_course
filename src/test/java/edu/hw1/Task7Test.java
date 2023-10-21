@@ -17,7 +17,7 @@ class Task7Test {
 
     @Test
     void rotateLeft1() {
-        Assertions.assertEquals(Task7.rotateLeft(16, 1), 1);
+        Assertions.assertEquals(22, Task7.rotateLeft(26, 3));
     }
 
     @Test
