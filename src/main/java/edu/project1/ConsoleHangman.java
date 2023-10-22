@@ -2,6 +2,7 @@ package edu.project1;
 
 import java.util.Scanner;
 
+@SuppressWarnings("RegexpSinglelineJava")
 public class ConsoleHangman {
 
     private final Session session;

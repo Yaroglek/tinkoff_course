@@ -1,6 +1,9 @@
 package edu.project1;
 
 public class Main {
+    private Main() {
+
+    }
 
     @SuppressWarnings("MagicNumber")
     public static void main(String[] args) throws Exception {

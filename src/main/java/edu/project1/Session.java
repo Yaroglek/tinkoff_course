@@ -46,10 +46,6 @@ public class Session {
             return new GuessResult.SuccessfulGuess(userAnswer, attempts, maxAttempts);
         }
 
-        if (answer.contains(guess) && new String(userAnswer).contains(guess)) {
-            return new GuessResult.SuccessfulGuess(userAnswer, attempts, maxAttempts);
-        }
-
         if (!answer.contains(guess)) {
             attempts++;
             if (attempts == maxAttempts) {
@@ -63,6 +59,6 @@ public class Session {
     }
 
     @NotNull GuessResult giveUp() {
-        return null;
+        return new GuessResult.Defeat(userAnswer, attempts, maxAttempts);
     }
 }
