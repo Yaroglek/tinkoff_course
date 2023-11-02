@@ -1,6 +1,5 @@
 package edu.project1;
 
-import java.util.ArrayList;
 import org.jetbrains.annotations.NotNull;
 
 public class Session {
