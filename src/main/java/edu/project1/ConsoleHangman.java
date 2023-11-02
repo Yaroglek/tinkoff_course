@@ -1,11 +1,13 @@
 package edu.project1;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
-@SuppressWarnings("RegexpSinglelineJava")
 public class ConsoleHangman {
 
     private final Session session;
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     public ConsoleHangman(Session session) {
         this.session = session;
@@ -13,12 +15,26 @@ public class ConsoleHangman {
 
     public void run() throws Exception {
         if (session.getAnswer().isEmpty()) {
-            throw new Exception("Incorrect length");
+            throw new GuessingException("Incorrect length");
         }
+
         Scanner in = new Scanner(System.in);
+        System.setProperty(
+            "java.util.logging.SimpleFormatter.format",
+            "%4$s: %5$s%n"
+        );
+        logger.info("If you want to surrender, press CTRL+D:");
+
         while (true) {
-            System.out.println("Guess a letter:");
-            var guess = tryGuess(session, in.nextLine());
+            logger.info("Guess a letter:");
+            String input;
+
+            try {
+                input = in.nextLine();
+            } catch (NoSuchElementException ignored) {
+                input = "";
+            }
+            var guess = !input.isEmpty() ? tryGuess(session, input) : session.giveUp();
             if (guess == null) {
                 continue;
             }
@@ -26,7 +42,8 @@ public class ConsoleHangman {
             if (isGameOver(guess)) {
                 break;
             }
-            System.out.println("The word: " + new String(session.getUserAnswer()));
+
+            logger.info("The word: " + new String(session.getUserAnswer()) + "\n");
         }
 
         in.close();
@@ -37,7 +54,7 @@ public class ConsoleHangman {
     }
 
     private GuessResult tryGuess(Session session, String input) {
-        if (input.length() != 1) {
+        if (input.length() != 1 || !Character.isLetter(input.charAt(0))) {
             return null;
         }
         try {
@@ -48,6 +65,6 @@ public class ConsoleHangman {
     }
 
     private void printState(GuessResult guessResult) {
-        System.out.println(guessResult.message());
+        logger.info(guessResult.message());
     }
 }

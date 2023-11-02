@@ -27,17 +27,13 @@ public class Session {
         return answer;
     }
 
-    @NotNull GuessResult guess(String guess) throws Exception {
-
+    @NotNull GuessResult guess(String input) throws Exception {
+        String guess = input.toLowerCase();
         if (answer.contains(guess) && !new String(userAnswer).contains(guess)) {
-            var indexes = new ArrayList<Integer>();
             for (var i = 0; i < answer.length(); i++) {
                 if (answer.charAt(i) == guess.charAt(0)) {
-                    indexes.add(i);
+                    userAnswer[i] = guess.charAt(0);
                 }
-            }
-            for (var index : indexes) {
-                userAnswer[index] = guess.charAt(0);
             }
 
             if (new String(userAnswer).equals(answer)) {
@@ -55,7 +51,7 @@ public class Session {
             return new GuessResult.FailedGuess(userAnswer, attempts, maxAttempts);
         }
 
-        throw new Exception("Something wrong");
+        throw new GuessingException("Incorrect input");
     }
 
     @NotNull GuessResult giveUp() {
