@@ -11,7 +11,7 @@ public interface Dictionary {
 
         @Override
         public @NotNull String randomWord() {
-            var index = new Random().nextInt(words.length);
+            var index = new Random().nextInt(0, words.length);
             return words[index];
         }
     }

@@ -32,9 +32,9 @@ public class ConsoleHangman {
             try {
                 input = in.nextLine();
             } catch (NoSuchElementException ignored) {
-                input = "";
+                input = "Defeat";
             }
-            var guess = !input.isEmpty() ? tryGuess(session, input) : session.giveUp();
+            var guess = !input.equals("Defeat") ? tryGuess(session, input) : session.giveUp();
             if (guess == null) {
                 continue;
             }
