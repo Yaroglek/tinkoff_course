@@ -9,9 +9,10 @@ public interface Dictionary {
     class GameDictionary implements Dictionary {
         private final String[] words = {"hello", "world"};
 
+        private static final Random random = new Random();
         @Override
         public @NotNull String randomWord() {
-            var index = new Random().nextInt(0, words.length);
+            var index = random.nextInt(0, words.length);
             return words[index];
         }
     }

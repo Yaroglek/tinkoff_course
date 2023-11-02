@@ -9,6 +9,8 @@ public class ConsoleHangman {
     private final Session session;
     private final Logger logger = Logger.getLogger(getClass().getName());
 
+    private static final String DEFEAT = "Defeat";
+
     public ConsoleHangman(Session session) {
         this.session = session;
     }
@@ -32,9 +34,9 @@ public class ConsoleHangman {
             try {
                 input = in.nextLine();
             } catch (NoSuchElementException ignored) {
-                input = "Defeat";
+                input = DEFEAT;
             }
-            var guess = !input.equals("Defeat") ? tryGuess(session, input) : session.giveUp();
+            var guess = !input.equals(DEFEAT) ? tryGuess(session, input) : session.giveUp();
             if (guess == null) {
                 continue;
             }
