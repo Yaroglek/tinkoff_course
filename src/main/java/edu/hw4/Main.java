@@ -12,6 +12,6 @@ public class Main {
             new Animal("Dori", Animal.Type.FISH, Animal.Sex.F, 1, 10, 1, true),
             new Animal("Gnom", Animal.Type.SPIDER, Animal.Sex.M, 2, 15, 2, true)));
 
-        System.out.println(AnimalTasks.Task2(animals, 2).toString());
+        System.out.println(AnimalTasks.Task6(animals).toString());
     }
 }
