@@ -1,5 +1,7 @@
 package edu.hw4;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -115,5 +117,28 @@ public class AnimalTasks {
                 .thenComparing(Animal::sex)
                 .thenComparing(Animal::name))
             .toList();
+    }
+
+    public static Boolean task17(List<Animal> animals) {
+        var dogsAndSpiders = animals.stream()
+            .filter(animal -> animal.type() == Animal.Type.DOG || animal.type() == Animal.Type.SPIDER).toList();
+
+        var dogsCount = dogsAndSpiders.stream().filter(animal -> animal.type() == Animal.Type.DOG).count();
+        var spidersCount = dogsAndSpiders.stream().filter(animal -> animal.type() == Animal.Type.SPIDER).count();
+
+        var map = dogsAndSpiders.stream()
+            .filter(Animal::bites)
+            .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(e -> 1)));
+
+        return map.get(Animal.Type.SPIDER) / spidersCount > map.get(Animal.Type.DOG) / dogsCount;
+    }
+
+    public static Animal task18(List<Animal>... animalsLists) {
+        var animals = new ArrayList<Animal>();
+        Arrays.stream(animalsLists).forEach(animals::addAll);
+        return animals.stream()
+            .filter(animal -> animal.type() == Animal.Type.FISH)
+            .max(Comparator.comparingInt(Animal::weight))
+            .get();
     }
 }

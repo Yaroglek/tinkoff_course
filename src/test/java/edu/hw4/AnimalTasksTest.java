@@ -1,7 +1,6 @@
 package edu.hw4;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,8 +23,8 @@ class AnimalTasksTest {
             new Animal("Nemo", Animal.Type.FISH, Animal.Sex.M, 3, 23, 5, false)
         ));
 
-    //Во многих тестах в качестве аргумента метода будет браться лишь часть всех животных, чтобы чтобы не приходилось
-    //каждый раз передавать огромный список в expected
+    // Во многих тестах в качестве аргумента метода будет браться лишь часть всех животных, чтобы не приходилось
+    // каждый раз передавать огромный список в expected
     @Test
     void task1() {
         assertEquals(
@@ -99,7 +98,7 @@ class AnimalTasksTest {
     }
 
     @Test void task14() {
-        assertEquals(true, AnimalTasks.task14(animals, 100));
+        assertTrue(AnimalTasks.task14(animals, 100));
     }
 
     @Test void task15() {
@@ -116,5 +115,12 @@ class AnimalTasksTest {
             List.of(animals.get(11), animals.get(10), animals.get(9), animals.get(7), animals.get(8)),
             AnimalTasks.task16(animals.subList(7, 12))
         );
+    }
+
+    @Test void task17() {
+        assertTrue(AnimalTasks.task17(animals));
+    }
+    @Test void task18() {
+        assertEquals(animals.get(11), AnimalTasks.task18(animals.subList(0,11), animals.subList(11,12)));
     }
 }
