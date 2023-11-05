@@ -13,13 +13,7 @@ public interface Generator {
 
         @Override
         public Maze generate(int height, int width) {
-            Cell[][] grid = new Cell[height][width];
-
-            for (int row = 0; row < height; row++) {
-                for (int col = 0; col < width; col++) {
-                    grid[row][col] = new Cell(row, col, Cell.Type.WALL);
-                }
-            }
+            Cell[][] grid = gridInitialization(height, width);
 
             // Начальная клетка берется с нечетными координатами, для того чтобы генератор лабиринта изначально создавал
             // его со стенами и их не приходилось отрисовывать в дальнейшем отдельно.
@@ -76,6 +70,18 @@ public interface Generator {
             }
 
             return neighbors;
+        }
+
+        private Cell[][] gridInitialization(int height, int width) {
+            Cell[][] grid = new Cell[height][width];
+
+            for (int row = 0; row < height; row++) {
+                for (int col = 0; col < width; col++) {
+                    grid[row][col] = new Cell(row, col, Cell.Type.WALL);
+                }
+            }
+
+            return grid;
         }
     }
 }

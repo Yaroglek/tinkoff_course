@@ -1,12 +1,11 @@
 package edu.project2;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 public interface Solver {
     List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end);
@@ -17,36 +16,30 @@ public interface Solver {
         public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
             List<Coordinate> path = new ArrayList<>();
 
-            // Создание очереди для поиска в ширину
-            Queue<Coordinate> queue = new LinkedList<>();
+            var queue = new ArrayDeque<Coordinate>();
             Map<Coordinate, Coordinate> parentMap = new HashMap<>();
 
-            // Добавление стартовой точки в очередь
             queue.add(start);
             parentMap.put(start, null);
 
             while (!queue.isEmpty()) {
                 Coordinate current = queue.poll();
 
-                // Проверка, достигнута ли конечная точка
                 if (current.equals(end)) {
-                    // Восстановление пути, начиная от конечной точки
                     while (current != null) {
                         path.add(current);
                         current = parentMap.get(current);
                     }
 
-                    // Переворачивание пути, чтобы он начинался с стартовой точки
+                    // Переворачивание пути, чтобы он начинался со стартовой точки
                     Collections.reverse(path);
                     break;
                 }
 
-                // Поиск соседних проходов от текущей точки
-                List<Coordinate> neighbors = getPassageNeighbors(maze, current);
+                List<Coordinate> neighbors = getPassageNeighbors(maze, current.row(), current.col());
 
                 for (Coordinate neighbor : neighbors) {
                     if (!parentMap.containsKey(neighbor)) {
-                        // Добавление соседней точки в очередь и сохранение родительской точки
                         queue.add(neighbor);
                         parentMap.put(neighbor, current);
                     }
@@ -56,11 +49,7 @@ public interface Solver {
             return path;
         }
 
-        // Вспомогательный метод для получения соседних проходов от заданной точки
-        private List<Coordinate> getPassageNeighbors(Maze maze, Coordinate coordinate) {
-            int row = coordinate.row();
-            int col = coordinate.col();
-
+        private List<Coordinate> getPassageNeighbors(Maze maze, int row, int col) {
             List<Coordinate> neighbors = new ArrayList<>();
 
             if (row - 1 >= 0 && maze.grid()[row - 1][col].type() == Cell.Type.PASSAGE) {
