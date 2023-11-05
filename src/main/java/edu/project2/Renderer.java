@@ -8,6 +8,9 @@ public interface Renderer {
     String render(Maze maze, List<Coordinate> path);
 
     class RendererImpl implements Renderer {
+        private static final String WALL = "XXX";
+        private static final String PASSAGE = "   ";
+        private static final String PATH = " . ";
 
         @Override
         public String render(Maze maze) {
@@ -16,8 +19,8 @@ public interface Renderer {
             for (Cell[] row : maze.grid()) {
                 for (Cell cell : row) {
                     switch (cell.type()) {
-                        case WALL -> output.append("XXX");
-                        case PASSAGE -> output.append("   ");
+                        case WALL -> output.append(WALL);
+                        case PASSAGE -> output.append(PASSAGE);
                         default -> throw new RuntimeException();
                     }
                 }
@@ -33,11 +36,16 @@ public interface Renderer {
 
             for (Cell[] row : maze.grid()) {
                 for (Cell cell : row) {
-                    switch (cell.type()) {
-                        case WALL -> output.append("XXX");
-                        case PASSAGE -> output.append("   ");
+                    Coordinate currentCoordinate = new Coordinate(cell.row(), cell.col());
+                    if (path.contains(currentCoordinate)) {
+                        output.append(PATH);
+                    } else {
+                        switch (cell.type()) {
+                            case WALL -> output.append(WALL);
+                            case PASSAGE -> output.append(PASSAGE);
 
-                        default -> throw new RuntimeException();
+                            default -> throw new RuntimeException();
+                        }
                     }
                 }
                 output.append("\n");

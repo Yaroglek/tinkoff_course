@@ -33,21 +33,24 @@ public interface Generator {
             stack.push(new Coordinate(startRow, startCol));
 
             while (!stack.isEmpty()) {
-                Coordinate currentCoordinate = stack.pop();
-                int currentRow = currentCoordinate.row();
-                int currentCol = currentCoordinate.col();
+                Coordinate current = stack.pop();
+                int currentRow = current.row();
+                int currentCol = current.col();
                 var neighbors = getUnvisitedNeighbors(currentRow, currentCol, grid);
 
                 if (!neighbors.isEmpty()) {
-                    stack.push(currentCoordinate);
+                    stack.push(current);
                     Cell randomNeighbor = neighbors.get(random.nextInt(0, neighbors.size()));
                     int neighborRow = randomNeighbor.row();
                     int neighborCol = randomNeighbor.col();
-                    int wallRow = currentRow + (neighborRow - currentRow) / 2;
-                    int wallCol = currentCol + (neighborCol - currentCol) / 2;
+
+                    // Это координаты точки, находящейся между current и randomNeighbor.
+                    // Ее также необходимо сделать PASSAGE, чтобы соединить их.
+                    int middleRow = currentRow + (neighborRow - currentRow) / 2;
+                    int middleCol = currentCol + (neighborCol - currentCol) / 2;
 
                     grid[neighborRow][neighborCol] = new Cell(neighborRow, neighborCol, Cell.Type.PASSAGE);
-                    grid[wallRow][wallCol] = new Cell(wallRow, wallCol, Cell.Type.PASSAGE);
+                    grid[middleRow][middleCol] = new Cell(middleRow, middleCol, Cell.Type.PASSAGE);
 
                     stack.push(new Coordinate(neighborRow, neighborCol));
                 }
