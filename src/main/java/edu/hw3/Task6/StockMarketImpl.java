@@ -1,12 +1,13 @@
 package edu.hw3.Task6;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class StockMarketImpl implements StockMarket {
-    private PriorityQueue<Stock> stocks;
+    private final PriorityQueue<Stock> stocks;
 
     public StockMarketImpl() {
-        stocks = new PriorityQueue<>((s1, s2) -> Double.compare(s2.price(), s1.price()));
+        stocks = new PriorityQueue<>(Comparator.comparingInt(Stock::price).reversed());
     }
 
     @Override

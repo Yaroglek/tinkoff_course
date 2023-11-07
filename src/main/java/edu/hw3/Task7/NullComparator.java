@@ -2,10 +2,10 @@ package edu.hw3.Task7;
 
 import java.util.Comparator;
 
-public class NullComparator implements Comparator<String> {
+public class NullComparator<T> implements Comparator<T> {
 
     @Override
-    public int compare(String o1, String o2) {
+    public int compare(T o1, T o2) {
         if (o1 == null & o2 != null) {
             return -1;
         }
@@ -18,6 +18,6 @@ public class NullComparator implements Comparator<String> {
             return 0;
         }
 
-        return String.CASE_INSENSITIVE_ORDER.compare(o1, o2);
+        return o1.toString().compareTo(o2.toString());
     }
 }

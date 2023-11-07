@@ -13,4 +13,13 @@ class Task7Test {
         tree.put(null, "test");
         assertTrue(tree.containsKey(null));
     }
+
+    @Test
+    void compare1() {
+        var tree = new TreeMap<String, Integer>(new NullComparator());
+        tree.put(null, 1);
+        tree.put("gnom", 5);
+        tree.put("nibba", 7);
+        assertTrue(tree.containsKey(null));
+    }
 }

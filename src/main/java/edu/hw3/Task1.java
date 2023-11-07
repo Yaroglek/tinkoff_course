@@ -12,9 +12,9 @@ public class Task1 {
             char el = chars[i];
             if (isEnglishLetter(el)) {
                 if (Character.isUpperCase(el)) {
-                    chars[i] = (char) (65 - el + 90);
+                    chars[i] = (char) ('A' - el + 'Z');
                 } else {
-                    chars[i] = (char) (97 - el + 122);
+                    chars[i] = (char) ('a' - el + 'z');
                 }
             }
         }

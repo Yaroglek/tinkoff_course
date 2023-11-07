@@ -15,11 +15,11 @@ public class BackwardIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        return currentIndex-- > 0;
+        return currentIndex > 0;
     }
 
     @Override
     public T next() {
-        return list.get(currentIndex);
+        return list.get(--currentIndex);
     }
 }
