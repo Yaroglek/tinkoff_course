@@ -12,21 +12,21 @@ public class Task2 {
 
     }
 
-    public static List<LocalDate> findAllFridays13(int year) {
-        var result = new ArrayList<LocalDate>();
+    public static List<String> findAllFridaysThirteen(int year) {
+        var result = new ArrayList<String>();
 
         for (int i = 1; i < 13; i++) {
             LocalDate current13th = LocalDate.of(year, i, 13);
 
             if (current13th.getDayOfWeek() == DayOfWeek.FRIDAY) {
-                result.add(current13th);
+                result.add(current13th.toString());
             }
         }
 
         return result;
     }
 
-    public static LocalDate findNextFriday13(String date) {
+    public static String findNextFridayThirteen(String date) {
         boolean is13Friday = false;
         LocalDate result = LocalDate.parse(date);
 
@@ -35,6 +35,6 @@ public class Task2 {
             is13Friday = result.getDayOfMonth() == 13;
         }
 
-        return result;
+        return result.toString();
     }
 }

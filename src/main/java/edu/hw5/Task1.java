@@ -16,7 +16,7 @@ public class Task1 {
         Duration durationsSum = sessions.stream()
             .map(Task1::getDuration)
             .reduce(Duration::plus)
-            .get();
+            .orElse(Duration.ZERO);
 
         var averageDuration = durationsSum.dividedBy(sessions.size());
 
