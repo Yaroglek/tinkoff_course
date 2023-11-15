@@ -1,44 +1,58 @@
 package edu.hw2;
 
-import edu.hw2.Task2.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import static org.junit.jupiter.api.Assertions.*;
-
+import edu.hw2.Task2.Rectangle;
+import edu.hw2.Task2.Square;
+import org.junit.jupiter.api.Test;
 
 public class RectangleTest {
-    static Arguments[] rectangles() {
-        return new Arguments[]{
-                Arguments.of(new Rectangle()),
-                Arguments.of(new Square())
-        };
+    @Test
+    void rectangleArea1() {
+        var rect = new Rectangle();
+        rect.setWidth(30);
+        rect.setHeight(20);
+
+        assertEquals(600.0, rect.area());
     }
 
-    @ParameterizedTest
-    @MethodSource("rectangles")
-    void rectangleArea1(Rectangle rect) {
-        rect.setWidth(20);
-        rect.setHeight(10);
+    @Test
+    void rectangleArea2() {
+        var rect = new Rectangle();
+        rect.setWidth(7);
+        rect.setHeight(7);
 
-        assertEquals(200.0, rect.area());
+        assertEquals(49.0, rect.area());
     }
 
-    @ParameterizedTest
-    @MethodSource("rectangles")
-    void rectangleArea2(Rectangle rect) {
-        rect.setWidth(4);
-        rect.setHeight(4);
-
-        assertEquals(16.0, rect.area());
-    }
-
-    @ParameterizedTest
-    @MethodSource("rectangles")
-    void rectangleArea3(Rectangle rect) {
+    @Test
+    void rectangleArea3() {
+        var rect = new Rectangle();
         rect.setWidth(0);
-        rect.setHeight(4);
+        rect.setHeight(2);
 
         assertEquals(0.0, rect.area());
+    }
+
+    @Test
+    void squareArea1() {
+        var square = new Square();
+        square.setWidth(2);
+        square.setHeight(10);
+
+        assertEquals(100, square.area());
+    }
+
+    @Test
+    void squareArea2() {
+        var square = new Square();
+        square.setSize(6);
+        assertEquals(36, square.area());
+    }
+
+    @Test
+    void squareArea3() {
+        var square = new Square();
+        square.setHeight(11);
+        assertEquals(121, square.area());
     }
 }

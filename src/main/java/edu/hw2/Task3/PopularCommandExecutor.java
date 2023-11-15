@@ -3,15 +3,11 @@ package edu.hw2.Task3;
 public final class PopularCommandExecutor {
     private final ConnectionManager manager;
     private final int maxAttempts;
-    private Exception cause;
+    private ConnectionException cause;
 
     public PopularCommandExecutor(ConnectionManager manager, int maxAttempts) {
         this.manager = manager;
         this.maxAttempts = maxAttempts;
-    }
-
-    public Exception getCause() {
-        return cause;
     }
 
     public void updatePackages() throws Exception {
@@ -23,14 +19,14 @@ public final class PopularCommandExecutor {
         Connection connection = manager.getConnection();
         while (attempts < maxAttempts) {
             attempts++;
+            cause = null;
             try (connection) {
                 connection.execute(command);
                 return;
-            } catch (Exception ignored) {
-
+            } catch (ConnectionException exception) {
+                cause = exception;
             }
         }
-        cause = new ConnectionException(2, "all attempts are used");
-        throw cause;
+        throw new ConnectionException(2, "all attempts are used");
     }
 }

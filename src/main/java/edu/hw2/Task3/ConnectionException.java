@@ -5,11 +5,16 @@ public class ConnectionException extends RuntimeException {
     private final String errorMessage;
 
     public ConnectionException(int code, String message) {
+        super("Exception: " + message + ". Code: " + code);
         this.code = code;
         this.errorMessage = message;
     }
 
-    public String getMessage() {
-        return "Error message:" + " " + errorMessage + ". " + "Code:" + " " + code;
+    public int getCode() {
+        return code;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
     }
 }

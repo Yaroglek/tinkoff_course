@@ -10,6 +10,6 @@ class PopularCommandExecutorTest {
     void updatePackages() {
         var executor = new PopularCommandExecutor(new ConnectionManager.DefaultConnectionManager(), 0);
         ConnectionException exception = assertThrows(ConnectionException.class, executor::updatePackages);
-        assertEquals("Error message: all attempts are used. Code: 2", exception.getMessage());
+        assertEquals("Exception: all attempts are used. Code: 2", exception.getMessage());
     }
 }
