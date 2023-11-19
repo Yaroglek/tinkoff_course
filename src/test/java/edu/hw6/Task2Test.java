@@ -29,7 +29,7 @@ class Task2Test {
                 .forEach(actual::add);
         }
 
-        assertEquals(List.of("data.txt, data — копия.txt, 1, data — копия (2).txt"), actual);
+        assertEquals(List.of("data.txt", "data — копия.txt", "1", "data — копия (2).txt"), actual);
 
         try (Stream<Path> files = Files.walk(path.getParent())) {
             files
