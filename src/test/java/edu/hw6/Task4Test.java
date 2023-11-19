@@ -13,7 +13,7 @@ class Task4Test {
 
     @Test
     void composition() throws IOException {
-        Path path = Paths.get("C:\\Users\\kreml\\IdeaProjects\\tinkoff\\src\\main\\java\\edu\\hw6\\Task4\\output.txt");
+        Path path = Paths.get("src/main/java/edu/hw6/Task4/output.txt");
         Task4.composition(path);
         String text = Files.readAllLines(path).get(0);
         assertEquals(text, "Programming is learned by writing programs. ― Brian Kernighan");

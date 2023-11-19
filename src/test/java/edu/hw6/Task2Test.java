@@ -17,7 +17,7 @@ class Task2Test {
     @Test
     void cloneFile() throws IOException {
         Path path =
-            Paths.get("C:\\Users\\kreml\\IdeaProjects\\tinkoff\\src\\main\\java\\edu\\hw6\\Task2\\files\\data.txt");
+            Paths.get("src/main/java/edu/hw6/Task2/files/data.txt");
         Task2.cloneFile(path);
         Task2.cloneFile(path);
         Task2.cloneFile(path);

@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class Task3Test {
 
     @Test void filter() throws IOException {
-        Path path = Paths.get("C:\\Users\\kreml\\IdeaProjects\\tinkoff\\src\\main\\java\\edu\\hw6\\Task3");
+        Path path = Paths.get("src/main/java/edu/hw6/Task3");
 
         DirectoryStream.Filter<Path> filter = regularFile()
             .and(readable())
