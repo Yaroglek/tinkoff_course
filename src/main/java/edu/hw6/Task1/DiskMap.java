@@ -10,7 +10,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +32,7 @@ public class DiskMap implements Map<String, String> {
                 }
             });
         } catch (IOException ex) {
-            Logger.getLogger("load").warning("Load file error");
+            throw new RuntimeException(ex);
         }
     }
 
@@ -46,7 +45,7 @@ public class DiskMap implements Map<String, String> {
             }
 
         } catch (IOException ex) {
-            Logger.getLogger("save").warning("Save file error");
+            throw new RuntimeException(ex);
         }
     }
 

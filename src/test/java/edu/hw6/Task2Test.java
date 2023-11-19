@@ -39,7 +39,7 @@ class Task2Test {
                     try {
                         Files.deleteIfExists(path1);
                     } catch (IOException e) {
-                        Logger.getLogger("Task2test").warning("error");
+                        throw new RuntimeException(e);
                     }
                 });
         }

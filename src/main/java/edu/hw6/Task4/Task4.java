@@ -8,7 +8,6 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.logging.Logger;
 import java.util.zip.Adler32;
 import java.util.zip.CheckedOutputStream;
 
@@ -29,7 +28,7 @@ public class Task4 {
 
             printWriter.write("Programming is learned by writing programs. ― Brian Kernighan\n");
         } catch (IOException ex) {
-            Logger.getLogger("composition").warning("composition error");
+            throw new RuntimeException(ex);
         }
     }
 }

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +20,7 @@ public class Task2 {
                     Files.createFile(path);
                     break;
                 } catch (IOException ex) {
-                    Logger.getLogger("cloneFile").warning("clone file error");
+                    throw new RuntimeException(ex);
                 }
             } else {
                 String parent = path.getParent().toString();
