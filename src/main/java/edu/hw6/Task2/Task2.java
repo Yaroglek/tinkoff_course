@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("ParameterAssignment")
+@SuppressWarnings({"ParameterAssignment", "MultipleStringLiterals"})
 public class Task2 {
     private Task2() {
 
@@ -28,15 +28,17 @@ public class Task2 {
                 String[] parts = path.getFileName().toString().split("\\.");
                 String name = parts[0];
                 String extension = parts[1];
-                Pattern pattern = Pattern.compile("^.+ — копия \\((\\d+)\\)$");
+                Pattern pattern = Pattern.compile("^.+ — копия( \\((\\d+)\\))?$");
                 Matcher matcher = pattern.matcher(name);
 
-                if (matcher.matches()) {
-                    int oldNum = Integer.parseInt(matcher.group(1));
-                    String newName = name.replaceFirst("\\(" + oldNum + "\\)", "(" + oldNum + 1 + ")");
-                    path = Paths.get(parent, newName + "." + extension);
+                if (!matcher.matches()) {
+                    path = Paths.get(parent, name + " — копия" + "." + extension);
+                } else if (name.endsWith(" — копия")) {
+                    path = Paths.get(parent, name + " (2)." + extension);
                 } else {
-                    path = Paths.get(parent, name + " — копия (1)" + "." + extension);
+                    int oldNum = Integer.parseInt(matcher.group(2));
+                    String newName = name.replaceFirst("\\(" + oldNum + "\\)", "(" + (oldNum + 1) + ")");
+                    path = Paths.get(parent, newName + "." + extension);
                 }
             }
         }

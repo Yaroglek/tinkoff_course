@@ -2,6 +2,7 @@ package edu.hw6.Task4;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -16,17 +17,17 @@ public class Task4 {
 
     }
 
-    public static void composition(Path path) throws IOException {
-        try (
-            PrintWriter printWriter =
-                new PrintWriter(
-                    new OutputStreamWriter(
-                        new BufferedOutputStream(
-                            new CheckedOutputStream(
-                                Files.newOutputStream(path),
-                                new Adler32()
-                            )), StandardCharsets.UTF_8.newEncoder()));) {
-            printWriter.write("Programming is learned by writing programs. ― Brian Kernighan");
+    public static void composition(Path path) {
+        try (OutputStream fileOutputStream = Files.newOutputStream(path);
+             CheckedOutputStream checkedOutputStream = new CheckedOutputStream(fileOutputStream, new Adler32());
+             BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(checkedOutputStream);
+             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
+                 bufferedOutputStream,
+                 StandardCharsets.UTF_8
+             );
+             PrintWriter printWriter = new PrintWriter(outputStreamWriter)) {
+
+            printWriter.write("Programming is learned by writing programs. ― Brian Kernighan\n");
         } catch (IOException ex) {
             Logger.getLogger("composition").info("composition error");
         }
