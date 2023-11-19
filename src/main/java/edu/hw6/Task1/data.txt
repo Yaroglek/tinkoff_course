@@ -1,3 +1,2 @@
-eblan:hui
-gnom:daun
-gay:nigger
+gnom:gnomik
+hello:world
