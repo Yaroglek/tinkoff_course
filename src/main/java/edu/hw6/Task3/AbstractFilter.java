@@ -8,13 +8,19 @@ import java.nio.file.Path;
 import java.nio.file.PathMatcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("MagicNumber")
 public interface AbstractFilter extends DirectoryStream.Filter<Path> {
     default AbstractFilter and(AbstractFilter other) {
         return path -> this.accept(path) && other.accept(path);
     }
 
-    AbstractFilter regularFile = Files::isRegularFile;
-    AbstractFilter readable = Files::isReadable;
+    static AbstractFilter regularFile() {
+        return Files::isRegularFile;
+    }
+
+    static AbstractFilter readable() {
+        return Files::isReadable;
+    }
 
     static AbstractFilter largerThan(long size) {
         return path -> {

@@ -1,20 +1,18 @@
 package edu.hw6.Task1;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class DiskMap implements Map<String, String> {
     private final String filePath;
@@ -27,16 +25,16 @@ public class DiskMap implements Map<String, String> {
     }
 
     private void load() {
-        try (var lines = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)){
-                lines.forEach(line -> {
-                    String[] parts = line.split(":");
-                    if (parts.length == 2) {
-                        map.put(parts[0], parts[1]);
-                    }
-                });
-        } catch (IOException e) {
+        try (var lines = Files.lines(Paths.get(filePath), StandardCharsets.UTF_8)) {
+            lines.forEach(line -> {
+                String[] parts = line.split(":");
+                if (parts.length == 2) {
+                    map.put(parts[0], parts[1]);
+                }
+            });
+        } catch (IOException ex) {
             // Handle any IO exception here
-            e.printStackTrace();
+            Logger.getLogger("load").info("Load file error");
         }
     }
 
@@ -48,9 +46,9 @@ public class DiskMap implements Map<String, String> {
                 writer.newLine();
             }
 
-        } catch (IOException e) {
+        } catch (IOException ex) {
             // Handle any IO exception here
-            e.printStackTrace();
+            Logger.getLogger("save").info("Save file error");
         }
     }
 

@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("ParameterAssignment")
 public class Task2 {
     private Task2() {
 
@@ -19,7 +21,7 @@ public class Task2 {
                     Files.createFile(path);
                     break;
                 } catch (IOException ex) {
-                    ex.printStackTrace();
+                    Logger.getLogger("cloneFile").info("clone file error");
                 }
             } else {
                 String parent = path.getParent().toString();
