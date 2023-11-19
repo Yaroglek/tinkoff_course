@@ -18,7 +18,7 @@ public class Task4 {
     }
 
     public static void composition(Path path) {
-        try (OutputStream fileOutputStream = Files.newOutputStream(path);
+        try (OutputStream fileOutputStream = Files.newOutputStream(Files.createFile(path));
              CheckedOutputStream checkedOutputStream = new CheckedOutputStream(fileOutputStream, new Adler32());
              BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(checkedOutputStream);
              OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
@@ -29,7 +29,7 @@ public class Task4 {
 
             printWriter.write("Programming is learned by writing programs. ― Brian Kernighan\n");
         } catch (IOException ex) {
-            Logger.getLogger("composition").info("composition error");
+            Logger.getLogger("composition").warning("composition error");
         }
     }
 }

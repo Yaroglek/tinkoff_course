@@ -21,15 +21,14 @@ public class Task2 {
                     Files.createFile(path);
                     break;
                 } catch (IOException ex) {
-                    Logger.getLogger("cloneFile").info("clone file error");
+                    Logger.getLogger("cloneFile").warning("clone file error");
                 }
             } else {
                 String parent = path.getParent().toString();
                 String[] parts = path.getFileName().toString().split("\\.");
                 String name = parts[0];
                 String extension = parts[1];
-                Pattern pattern = Pattern.compile("^.+ — копия( \\((\\d+)\\))?$");
-                Matcher matcher = pattern.matcher(name);
+                Matcher matcher = Pattern.compile("^.+ — копия( \\((\\d+)\\))?$").matcher(name);
 
                 if (!matcher.matches()) {
                     path = Paths.get(parent, name + " — копия" + "." + extension);

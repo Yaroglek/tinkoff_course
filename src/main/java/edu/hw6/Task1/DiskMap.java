@@ -33,8 +33,7 @@ public class DiskMap implements Map<String, String> {
                 }
             });
         } catch (IOException ex) {
-            // Handle any IO exception here
-            Logger.getLogger("load").info("Load file error");
+            Logger.getLogger("load").warning("Load file error");
         }
     }
 
@@ -47,8 +46,7 @@ public class DiskMap implements Map<String, String> {
             }
 
         } catch (IOException ex) {
-            // Handle any IO exception here
-            Logger.getLogger("save").info("Save file error");
+            Logger.getLogger("save").warning("Save file error");
         }
     }
 
