@@ -6,6 +6,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class AnimalTasks {
@@ -49,9 +52,10 @@ public class AnimalTasks {
 
     public static Map<Animal.Type, Animal> task6(List<Animal> animals) {
         return animals.stream()
-            .collect(Collectors.groupingBy(
+            .collect(Collectors.toMap(
                 Animal::type,
-                Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(Animal::weight)), Optional::get)
+                Function.identity(),
+                BinaryOperator.maxBy(Comparator.comparingInt(Animal::weight))
             ));
     }
 
@@ -120,17 +124,22 @@ public class AnimalTasks {
     }
 
     public static Boolean task17(List<Animal> animals) {
-        var dogsAndSpiders = animals.stream()
-            .filter(animal -> animal.type() == Animal.Type.DOG || animal.type() == Animal.Type.SPIDER).toList();
+        Map<Animal.Type, Integer> typeCount = animals.stream()
+            .filter(animal -> animal.type() == Animal.Type.DOG || animal.type() == Animal.Type.SPIDER)
+            .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(e -> 1)));
 
-        var dogsCount = dogsAndSpiders.stream().filter(animal -> animal.type() == Animal.Type.DOG).count();
-        var spidersCount = dogsAndSpiders.stream().filter(animal -> animal.type() == Animal.Type.SPIDER).count();
+        long dogsCount = typeCount.getOrDefault(Animal.Type.DOG, 0);
+        long spidersCount = typeCount.getOrDefault(Animal.Type.SPIDER, 0);
 
-        var map = dogsAndSpiders.stream()
+        if (spidersCount == 0 || dogsCount == 0) {
+            return false;
+        }
+
+        Map<Animal.Type, Integer> bitingCount = animals.stream()
             .filter(Animal::bites)
             .collect(Collectors.groupingBy(Animal::type, Collectors.summingInt(e -> 1)));
 
-        return map.get(Animal.Type.SPIDER) / spidersCount > map.get(Animal.Type.DOG) / dogsCount;
+        return bitingCount.get(Animal.Type.SPIDER) / spidersCount > bitingCount.get(Animal.Type.DOG) / dogsCount;
     }
 
     public static Animal task18(List<Animal>... animalsLists) {
@@ -140,5 +149,26 @@ public class AnimalTasks {
             .filter(animal -> animal.type() == Animal.Type.FISH)
             .max(Comparator.comparingInt(Animal::weight))
             .get();
+    }
+
+    public static Map<String, Set<AnimalValidator.ValidationError>> task19(List<Animal> animals) {
+        return animals.stream()
+            .collect(Collectors.toMap(Animal::name, AnimalValidator::getErrors))
+            .entrySet().stream()
+            .filter(set -> !set.getValue().isEmpty())
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    public static Map<String, String> task20(List<Animal> animals) {
+        return animals.stream()
+            .collect(Collectors.toMap(
+                Animal::name,
+                animal -> AnimalValidator.getErrors(animal).stream().map(AnimalValidator.ValidationError::error)
+                    .collect(
+                        Collectors.joining(", "))
+
+            )).entrySet().stream()
+            .filter(set -> !set.getValue().isEmpty())
+            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 }
